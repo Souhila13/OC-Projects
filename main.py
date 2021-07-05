@@ -17,40 +17,27 @@ if response.ok:
     print(page[0].text)
 
     book = {}
-    book["name"] = "A Light in the Attic"
-    book["price"] = "51.77"
+    book["name"] = "A Light in the Attic" """mettre le titre"""
+    book["price"] = "51.77" """mettre le prix""" 
+
+
+    table = soup.table.find_all('td') 
+    code = table[0].text
+    prix = table[3].text
+
+    description = soup.find_all('p')[3].text 
+    
+    print(book)
+
+
 
     """for valeur in book.values(): 
         print(valeur)"""
 
-    for cle, valeur in book.items(): 
-        print (cle, valeur)   
-    
-    
-
-  
-
-
-
-
-
-
-
-
-
-
-
+   """for cle in book.keys(): 
+        print (cle)"""
 
     
-   
-    
-
-
-
-
-
-
-
     
     
 
