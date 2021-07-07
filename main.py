@@ -16,26 +16,43 @@ if response.ok:
     page = soup.find_all('article', {'class': 'product_page'})
     print(page[0].text)
 
+    table = soup.table.find_all('td')
+    
     book = {}
-    book["name"] = "A Light in the Attic" """mettre le titre"""
-    book["price"] = "51.77" """mettre le prix""" 
-
-
-    table = soup.table.find_all('td') 
+    
     code = table[0].text
     prix = table[3].text
+    inclu = table[3].text
+    exclu = table[2].text
+    stock = table[5].text
+    vue = table[6].text
+    
+    image = soup.find('div', {'id': 'product_gallery'}).text
+    book["image_url"] = image
+    print(image)
 
-    description = soup.find_all('p')[3].text 
+    book["name"] = titre
+    book["price"] = prix
+    book["code"] = code 
+
+    book["price_inclu"]= inclu
+    book["price_exclu"] = exclu
+    book["available"] = stock
+    book["review_rating"] = vue
+    
+     
+
+
+    """description = soup.find_all('p')[3].text """
     
     print(book)
 
 
 
     """for valeur in book.values(): 
-        print(valeur)"""
-
-   """for cle in book.keys(): 
-        print (cle)"""
+        print(valeur) """ 
+    """for cle in book.keys(): 
+        print (cle) """
 
     
     
