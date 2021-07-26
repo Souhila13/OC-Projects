@@ -55,17 +55,18 @@ url = "https://books.toscrape.com/"
 response = requests.get(url)
 
 if response.ok: 
-    links = []
+    links_r = []
     soup = BeautifulSoup(response.text, 'html.parser')
     links = soup.find_all('div', {'class': 'image_container'})
     for div in links: 
         a = div.find('a')
         link = a['href']
-    links.append("https://books.toscrape.com/" + link)
+        links_r.append("https://books.toscrape.com/" + link)
     
-print(links)
+print(links_r)
 
-
+for book in links_r: 
+    print(livre(book))
 
 
         
