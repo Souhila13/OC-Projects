@@ -1,39 +1,78 @@
 import requests
 from bs4 import BeautifulSoup 
 
+
+def livre(url):
+    
+    response = requests.get(url)
+
+    if response.ok:
+        soup = BeautifulSoup(response.text, 'html.parser')
+        header = soup.find_all('div', {'class': 'product_main'})
+        print(header[0])
+
+        titre = header[0].find('h1').text
+        print(titre)
+
+        page = soup.find_all('article', {'class': 'product_page'})
+        print(page[0].text)
+
+        table = soup.table.find_all('td')
+        
+        book = {}
+        
+        code = table[0].text
+        prix = table[3].text
+        inclu = table[3].text
+        exclu = table[2].text
+        stock = table[5].text
+        vue = table[6].text
+
+        image_url = "http://books.toscrape.com" + soup.img['src'][5:]
+        
+        book["image_url"] = image_url
+        print(image_url)
+
+        book["name"] = titre
+        book["price"] = prix
+        book["code"] = code 
+
+        book["price_inclu"]= inclu
+        book["price_exclu"] = exclu
+        book["available"] = stock
+        book["review_rating"] = vue
+        return book
+    """description = soup.find_all('p')[3].text """
+    
 url = "http://books.toscrape.com/catalogue/a-light-in-the-attic_1000/index.html"
+    
+print(livre(url))
+
+
+
+url = "https://books.toscrape.com/"
 
 response = requests.get(url)
 
-if response.ok:
+if response.ok: 
+    links = []
     soup = BeautifulSoup(response.text, 'html.parser')
-    header = soup.find_all('div', {'class': 'product_main'})
-    print(header[0])
+    links = soup.find_all('div', {'class': 'image_container'})
+    for div in links: 
+        a = div.find('a')
+        link = a['href']
+    links.append("https://books.toscrape.com/" + link)
+    
+print(links)
 
-    titre = header[0].find('h1').text
-    print(titre)
 
-    page = soup.find_all('article', {'class': 'product_page'})
-    print(page[0].text)
 
-    book = {}
-    book["name"] = "A Light in the Attic"
-    book["price"] = "51.77"
 
-    """for valeur in book.values(): 
-        print(valeur)"""
+        
 
-    for cle, valeur in book.items(): 
-        print (cle, valeur)   
+        
     
     
-
-  
-
-
-
-
-
 
 
 
@@ -42,15 +81,24 @@ if response.ok:
 
 
     
+
+ 
+
+    
+        
+
    
+
+
+
+
+
+
+
+
+
+
     
-
-
-
-
-
-
-
     
     
 
