@@ -71,7 +71,7 @@ for book in links_r:
 
 
 
-def category
+
 
 url = "https://books.toscrape.com/catalogue/category/"
 
@@ -82,77 +82,12 @@ if response.ok:
     link_r = []
     soup = BeautifulSoup(response.text, 'html.parser')
     links =soup.find_all('div', {'class': 'page_inner'})
-    
-for category in url: 
-    a = div.find('ul')
+    print(
+
+    )
+"""for category in url: 
+     = div.find('li')
     links_r.append("https://books.toscrape.com/catalogue/category/" + link.replace)
 
     print(category)
-
-return link_r
-
-
-
-
-
-
-
-    
-
-
-        
-
-        
-    
-    
-
-
-
-
-
-
-
-    
-
- 
-
-    
-        
-
-   
-
-
-
-
-
-
-
-
-
-
-    
-    
-    
-
-
-
-
-        
-
-        
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
+"""
