@@ -62,11 +62,42 @@ if response.ok:
         a = div.find('a')
         link = a['href']
         links_r.append("https://books.toscrape.com/" + link)
+        
     
 print(links_r)
 
 for book in links_r: 
     print(livre(book))
+
+
+
+def category
+
+url = "https://books.toscrape.com/catalogue/category/"
+
+response = requests.get(url)
+
+
+if response.ok:
+    link_r = []
+    soup = BeautifulSoup(response.text, 'html.parser')
+    links =soup.find_all('div', {'class': 'page_inner'})
+    
+for category in url: 
+    a = div.find('ul')
+    links_r.append("https://books.toscrape.com/catalogue/category/" + link.replace)
+
+    print(category)
+
+return link_r
+
+
+
+
+
+
+
+    
 
 
         
