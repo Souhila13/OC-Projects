@@ -1,147 +1,63 @@
 import requests
 from bs4 import BeautifulSoup 
-
+from pprint import pprint
 
 def livre(url):
-    
+    """ Fonction qui réccupère les informations d'un livre
+     et les place dans un dictionnaire"""
+   
     response = requests.get(url)
-
     if response.ok:
         soup = BeautifulSoup(response.text, 'html.parser')
         header = soup.find_all('div', {'class': 'product_main'})
-        print(header[0])
-
         titre = header[0].find('h1').text
-        print(titre)
-
-        page = soup.find_all('article', {'class': 'product_page'})
-        print(page[0].text)
-
         table = soup.table.find_all('td')
-        
+        # book, le dictionnaire qui va contenir toutes les informations.
         book = {}
-        
-        code_barre = table[0].text
-        prix = table[3].text
-        inclu = table[3].text
-        exclu = table[2].text
-        stock = table[5].text
-        vue = table[6].text
-
-        image_url = "http://books.toscrape.com" + soup.img['src'][5:]
-        
-        book["image_url"] = image_url
-        print(image_url)
-
         book["name"] = titre
-        book["price"] = prix
-        book["code"] = code_barre 
+        book["image_url"] = "http://books.toscrape.com" + soup.img['src'][5:]
+        book["price"] = table[3].text
+        book["code"] = table[0].text 
+        book["price_inclu"]= table[3].text
+        book["price_exclu"] = table[2].text
+        book["available"] = table[5].text
+        book["review_rating"] = table[6].text
+        """book["descrition"] = soup.find_all('p')[3].text"""
 
-        book["price_inclu"]= inclu
-        book["price_exclu"] = exclu
-        book["available"] = stock
-        book["review_rating"] = vue
-        
         return book
-    """description = soup.find_all('p')[3].text """
-    
-url = "http://books.toscrape.com/catalogue/a-light-in-the-attic_1000/index.html"
-    
-print(livre(url))
 
-
-
-url = "https://books.toscrape.com/"
-
+    # test sur une url
+print(livre("http://books.toscrape.com/catalogue/a-light-in-the-attic_1000/index.html"))
+        
+url = "https://books.toscrape.com/"        
+   
 response = requests.get(url)
-
-if response.ok: 
-    link_r = []
+if response.ok:
+    links_r = []
     soup = BeautifulSoup(response.text, 'html.parser')
     links = soup.find_all('div', {'class': 'image_container'})
-    for div in links: 
+    for div in links:
         a = div.find('a')
         link = a['href']
-        link_r.append("https://books.toscrape.com/" + link)
-    
-print(link_r)
+        links_r.append("https://books.toscrape.com/" + link)
 
-for book in link_r: 
+print(links_r)
+
+for book in links_r:
     print(livre(book))
 
-url = "https://books.toscrape.com/catalogue/category/books_1/index.html" 
 
-response = requests.get(url)
+url = "https://books.toscrape.com/catalogue/category/books/travel_2/index.html"
+
+
 
 if response.ok:
     category = []
     soup = BeautifulSoup(response.text, 'html.parser')
-    links = soup.find_all('div', {'class': 'page_inner'})
-    
-    for category in url: 
-        a = div.find('li', {'class': 'active'})
-        url.replace("https://books.toscrape.com/catalogue/category/books_1/index.html" + link)
-
-print(category)
-
-
-
-
-
-
-        
-
-        
-    
-    
-
-
-
-
-
-
-
-    
-
- 
-
-    
-        
-
-   
-
-
-
-
-
-
-
-
-
-
-    
-    
-    
-
-
-
-
-        
-
-        
-
-
-
-
-
-
-
-
-
-
+    links =soup.find_all('div', {'class': 'side_categories'})
+    for li in category:
+        categorie = li.find('ul')
+        link = a['href']
+        category.append("https://books.toscrape.com/catalogue/category/books/travel_2/index.html" + link)   
 
   
-
-
-
-
