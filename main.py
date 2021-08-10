@@ -43,21 +43,21 @@ if response.ok:
 
 print(links_r)
 
-for book in links_r:
-    print(livre(book))
-
-
 url = "https://books.toscrape.com/catalogue/category/books/travel_2/index.html"
 
-
-
+ 
 if response.ok:
     category = []
     soup = BeautifulSoup(response.text, 'html.parser')
     links =soup.find_all('div', {'class': 'side_categories'})
-    for li in category:
+    for li in links:
         categorie = li.find('ul')
         link = a['href']
-        category.append("https://books.toscrape.com/catalogue/category/books/travel_2/index.html" + link)   
-
+        
+        print(categorie)
+        #category.append("https://books.toscrape.com/catalogue/category/books/travel_2/index.html" + link)   
+"""
+for book in links_r:
+    print(livre(book))
+"""
   
