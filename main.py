@@ -74,10 +74,20 @@ def get_all(url):
     for book in links_r:
         print(livre(book))
 
+book = livre(url)
 
-with open('librairie.csv', 'r') as file:
-    reader = csv.reader(file)
-    for link in reader: 
-        file.reader(link + '\n')
+with open('librairie.csv', 'w') as file:
+    code = list(book.keys())
+    for link in write: 
+        file.write(link + '\n')
 
 
+url = "https://books.toscrape.com/catalogue/category/books/philosophy_7/index.html"
+
+response = requests.get(url)
+if response.ok:
+        soup = BeautifulSoup(response.text, 'lxml')
+        info = soup.find('ol', {'class': 'row'}) 
+        print(info)
+
+fieldnames = list(livre.keys())
