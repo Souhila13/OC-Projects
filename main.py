@@ -90,4 +90,4 @@ if response.ok:
         info = soup.find('ol', {'class': 'row'}) 
         print(info)
 
-fieldnames = list(livre.keys())
+
